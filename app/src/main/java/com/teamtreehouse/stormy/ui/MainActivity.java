@@ -17,8 +17,11 @@ import android.widget.Toast;
 import com.teamtreehouse.stormy.R;
 import com.teamtreehouse.stormy.weather.Current;
 import com.teamtreehouse.stormy.databinding.ActivityMainBinding;
+import com.teamtreehouse.stormy.weather.Day;
 import com.teamtreehouse.stormy.weather.Forecast;
+import com.teamtreehouse.stormy.weather.Hour;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -131,8 +134,23 @@ public class MainActivity extends AppCompatActivity {
     Forecast forecast = new Forecast();
 
     forecast.setCurrentForecast(getCurrentDetails(jsonData));
+    forecast.setHourlyForecast(getHourlyForecast(jsonData));
+    forecast.setDailyForecast(getDailyForecast(jsonData));
 
     return forecast;
+  }
+
+  private Day[] getDailyForecast(String jsonData) {
+  }
+
+  private Hour[] getHourlyForecast(String jsonData) throws JSONException {
+
+    JSONObject forecast = new JSONObject(jsonData);
+    String timezone = forecast.getString("timezone");
+
+    JSONObject hourly = forecast.getJSONObject("hourly");
+    JSONArray data = hourly.getJSONArray("data");
+
   }
 
   private Current getCurrentDetails(String jsonData) throws JSONException {
