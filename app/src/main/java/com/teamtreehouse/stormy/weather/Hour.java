@@ -1,15 +1,44 @@
 package com.teamtreehouse.stormy.weather;
 
-public class Hour {
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+
+public class Hour extends BaseObservable {
+
+  @Bindable
   private long time;
+  @Bindable
   private String summary;
+  @Bindable
   private double temperature;
+  @Bindable
   private String icon;
+  @Bindable
   private String timeZone;
 
-  public long getTime() {
-    return time;
+  public Hour() {
+  }
+
+  public Hour(long time, String summary, double temperature, String icon, String timeZone) {
+
+    this.time = time;
+    this.summary = summary;
+    this.temperature = temperature;
+    this.icon = icon;
+    this.timeZone = timeZone;
+  }
+
+  public String getTime() {
+    SimpleDateFormat formatter = new SimpleDateFormat("h a");
+    formatter.setTimeZone(TimeZone.getTimeZone(timeZone));
+    Date dateTime = new Date(time * 1000);
+    return formatter.format(dateTime);
   }
 
   public void setTime(long time) {
@@ -24,16 +53,16 @@ public class Hour {
     this.summary = summary;
   }
 
-  public double getTemperature() {
-    return temperature;
+  public int getTemperature() {
+    return (int)Math.round(temperature);
   }
 
   public void setTemperature(double temperature) {
     this.temperature = temperature;
   }
 
-  public String getIcon() {
-    return icon;
+  public int getIcon() {
+    return Forecast.getIconId(icon);
   }
 
   public void setIcon(String icon) {
