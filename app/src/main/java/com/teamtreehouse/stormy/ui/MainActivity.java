@@ -27,6 +27,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -218,6 +222,12 @@ public class MainActivity extends AppCompatActivity {
 
   public void hourlyOnClick(View view) {
     Intent intent = new Intent(this, HourlyForecastActivity.class);
+
+    // Get Hourly Data to pass to HourlyForecastActivity
+
+    List<Hour> hours = Arrays.asList(forecast.getHourlyForecast());
+    intent.putExtra("HourlyList", (Serializable) hours);
+
     startActivity(intent);
   }
 

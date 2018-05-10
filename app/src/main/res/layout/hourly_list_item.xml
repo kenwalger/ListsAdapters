@@ -6,6 +6,7 @@
         <variable
             name="hour"
             type="com.teamtreehouse.stormy.weather.Hour"/>
+
     </data>
 
     <RelativeLayout

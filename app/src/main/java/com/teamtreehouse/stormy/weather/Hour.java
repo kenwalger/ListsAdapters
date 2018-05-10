@@ -3,13 +3,12 @@ package com.teamtreehouse.stormy.weather;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
-public class Hour extends BaseObservable {
+public class Hour extends BaseObservable implements Serializable {
 
   @Bindable
   private long time;
